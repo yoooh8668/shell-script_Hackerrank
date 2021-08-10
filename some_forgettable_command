@@ -4,10 +4,12 @@
 
 
 
-read <var>			#read stdin and save to <var>
+read var1			#read stdin and save to var1
+#there is no '$' before var1
 
 echo $[$x + $y]		#echo after calculation   
 
-
+#Conditions list
+https://shengyu7697.github.io/shell-script-if/
 
 COMMENT
