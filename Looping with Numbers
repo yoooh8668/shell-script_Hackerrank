@@ -1,0 +1,18 @@
+#!/bin/bash
+
+for ((i=1;i<=50;i++))
+do
+	echo $i
+done
+
+
+<<COMMENT
+
+#also work with
+for i in {1..50}
+do
+	echo "$i"
+done
+
+#end of COMMENT
+COMMENT
