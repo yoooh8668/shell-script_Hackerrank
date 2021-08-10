@@ -1,0 +1,6 @@
+#!/bin/bash
+#Write a Bash script which accepts as input and displays the greeting "Welcome (name)"
+#Read input in stdin
+
+read name             #variable name save stdin
+echo "Welcome $name"
