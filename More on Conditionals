@@ -1,0 +1,13 @@
+#!/bin/bash
+
+read L1
+read L2
+read L3
+
+if [ $L1 -eq $L2 ] && [ $L2 -eq $L3 ]; then
+    echo 'EQUILATERAL'
+elif [ $L1 -eq $L2 ] || [ $L2 -eq $L3 ] || [ $L3 -eq $L1 ]; then
+    echo 'ISOSCELES'
+else
+    echo 'SCALENE'
+fi
