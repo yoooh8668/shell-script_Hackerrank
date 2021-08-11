@@ -1,0 +1,19 @@
+#!/bin/bash
+read expression
+
+printf "%.3f" $(echo "scale=4;${expression}" | bc)
+
+: '
+printf "%.4f\n" <number>
+It just like printf in c, print <number> in %.4f form
+default printf will do the round up 
+
+$(<command>)  means the sub-shell,
+it is like variable and store the result passed by sub-shell
+
+bc : the way we calculate in shell, often use in pipeline.
+
+Or use this way which cannot create round up 
+#echo "scale=3; ${expression}" | bc -l
+
+'
