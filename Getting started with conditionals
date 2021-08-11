@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# -eq is use for int, please use '=' or '==' to compare char or string
+
+#echo $text			#Y
+
+#echo '$text'		#$text
+#echo "$text"		#Y
+
+#echo '\$text'		#\$text
+#echo "\$text"		#$text
+
+#echo ${text}		#Y
+#echo $[text]		#0   #array?
+
+#'' is string modif
+
+
+read text
+if [ $text = 'Y' ] || [ $text = 'y' ] ; then
+    echo "YES"
+elif [ $text = 'N' ] || [ $text = 'n' ]; then
+    echo "NO"
+fi;
