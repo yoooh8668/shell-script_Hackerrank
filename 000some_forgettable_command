@@ -1,4 +1,3 @@
-<<COMMENT
 # shell-script_Hackerrank
 #practice for shell script in Hackerrank
 
@@ -12,4 +11,20 @@ echo $[$x + $y]		#echo after calculation
 #Conditions list
 https://shengyu7697.github.io/shell-script-if/
 
-COMMENT
+
+#multiple comment1
+#the space between : and ' is important
+: '
+SOME_COMMENT1
+SOME_COMMENT2
+'
+
+
+#multiple comment2
+#this way usual apper no highlight in text editor
+: <<'MULTIPLE_COMMENT'
+SOME_COMMENT1
+SOME_COMMENT2
+MULTIPLE_COMMENT
+
+
