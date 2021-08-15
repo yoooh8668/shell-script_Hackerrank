@@ -1,0 +1,58 @@
+#!/bin/bash
+read N
+
+LAYER=5
+#START_1 and END_1 is for sector 1 (rising)
+START_1=20
+END_1=80
+
+#SQUARE_7 means 2^(7-LAYER), SQUARE_5 means 2^(5-LAYER), 
+SQUARE_7=$[ 2** $[7 - $LAYER]]
+SQUARE_5=$[ 2** $[5 - $LAYER]]
+#printf "SQUARE_7 =$SQUARE_7, SQUARE_5= $SQUARE_5\n"
+
+#only sector 1(rising)
+for ((i=1;i<64;i++))
+do
+    #printf "i= $i\n"
+    
+    #sector 1 (rising)
+    if [[ $i -ge $[$SQUARE_7 - $SQUARE_5] ]];then
+        TAR_PRINT=$START_1
+        for ((j=1;j<=101;j++))
+        do
+            #if [ $j -eq $TAR_PRINT] && [ $j -le $END_1 ]; then #non-work
+            if [[ $j -eq $TAR_PRINT ]];then
+                if  [[ $j -le $END_1 ]];then
+                    if [[ $N -ge $LAYER ]];then  #if (N<LAYER) not need to print
+                        printf "1"
+                    else
+                        printf "_"
+                    fi
+                    TAR_PRINT=$[$TAR_PRINT + $SQUARE_7]
+                else
+                    printf "_"
+                fi
+            else
+                printf "_"
+            fi
+        done
+    #sector 2 (separating)
+    else
+        for ((j=1;j<=101;j++))
+        do
+            printf "_"
+        done
+    fi
+    
+    if [[ $i -eq $[$SQUARE_7 - 1] ]];then
+        LAYER=$[$LAYER - 1]
+        SQUARE_7=$[ 2** $[7 - $LAYER]]
+        SQUARE_5=$[ 2** $[5 - $LAYER]]
+        START_1=$[ $START_1 + $SQUARE_5 ]
+        END_1=$[ $END_1 - $SQUARE_5 ]
+        printf "Now is LAYER=$LAYER, START_1=$START_1, $END_1=$END_1"
+
+    fi
+    printf "\n"
+done
