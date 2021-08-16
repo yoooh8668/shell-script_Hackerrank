@@ -2,16 +2,22 @@
 read N
 
 LAYER=5
+
+#SQUARE_7 means 2^(7-LAYER), SQUARE_5 means 2^(5-LAYER), 
+SQUARE_7=$[ 2** $[7 - $LAYER]]
+SQUARE_6=$[ 2** $[6 - $LAYER]]
+SQUARE_5=$[ 2** $[5 - $LAYER]]  #often use as sector
+#printf "SQUARE_7 =$SQUARE_7, SQUARE_5= $SQUARE_5\n"
+
 #START_1 and END_1 is for sector 1 (rising)
 START_1=20
 END_1=80
 
-#SQUARE_7 means 2^(7-LAYER), SQUARE_5 means 2^(5-LAYER), 
-SQUARE_7=$[ 2** $[7 - $LAYER]]
-SQUARE_5=$[ 2** $[5 - $LAYER]]
-#printf "SQUARE_7 =$SQUARE_7, SQUARE_5= $SQUARE_5\n"
+#START_2 and END_2 is for sector 2 (separating)
+START_2=19
+END_2=81
+OFFSET=0
 
-#only sector 1(rising)
 for ((i=1;i<64;i++))
 do
     #printf "i= $i\n"
@@ -34,10 +40,20 @@ do
         done
     #sector 2 (separating)
     else
+        DIR=0 #judge if it is shift for left or right.
+        #DIR=0 shift right, DIR=1 shift left
+        $TAR_PRINT=$START_2
         for ((j=1;j<=101;j++))
         do
-            printf "_"
+            if [ $DIR -eq 0 ];then
+                #shift right
+                DIR=1
+            else
+                #shift left
+                DIR=0
+            fi                        
         done
+        OFFSET=$[$OFFSET + 1]
     fi
     
     if [[ $i -eq $[$SQUARE_7 - 1] ]];then
@@ -46,7 +62,10 @@ do
         SQUARE_5=$[$SQUARE_5 * 2] 
         START_1=$[ $START_1 + $SQUARE_5 ]
         END_1=$[ $END_1 - $SQUARE_5 ]
-        printf "Now is LAYER=$LAYER, START_1=$START_1, $END_1=$END_1"
+        START_2=$[ $START_2 + $SQUARE_5 ]
+        END_2=$[ $END_2 - $SQUARE_5 ]
+        OFFSET=0
+        printf "Now is LAYER=$LAYER, START_1=$START_1, END_1=$END_1"
 
     fi
     printf "\n"
