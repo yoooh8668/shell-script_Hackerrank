@@ -25,7 +25,7 @@ do
     #sector 1 (rising)
     if [[ $i -ge $[$SQUARE_7 - $SQUARE_5] ]];then
         TAR_PRINT=$START_1
-        for ((j=1;j<=101;j++))
+        for ((j=1;j<101;j++))
         do
             if [ $j -eq $TAR_PRINT ] && [ $j -le $END_1 ] ;then
                 if [[ $N -ge $LAYER ]];then  #if (N<LAYER) not need to print
@@ -42,31 +42,57 @@ do
     else
         DIR=0 #judge if it is shift for left or right.
         #DIR=0 shift right, DIR=1 shift left
-        $TAR_PRINT=$START_2
-        for ((j=1;j<=101;j++))
+        TAR_PRINT=$START_2
+        for ((j=1;j<101;j++))
         do
             if [ $DIR -eq 0 ];then
                 #shift right
-                DIR=1
+                if [ $j -eq $[$TAR_PRINT + $OFFSET] ] && [ $j -le $END_2 ];then
+                    if [ $N -ge $LAYER ];then
+                        printf "1"
+                    else
+                        printf "_"
+                    fi
+                    TAR_PRINT=$[$TAR_PRINT + $SQUARE_6]
+                    DIR=1
+                else
+                    printf "_"
+                fi
             else
                 #shift left
-                DIR=0
-            fi                        
+                if [ $j -eq $[$TAR_PRINT - $OFFSET] ] && [ $j -le $END_2 ];then
+                    if [ $N -ge $LAYER ];then
+                        printf "1"
+                    else
+                        printf "_"
+                    fi
+                    TAR_PRINT=$[$TAR_PRINT + $SQUARE_6]
+                    DIR=0
+                else
+                    printf "_"
+                fi
+            fi             
         done
         OFFSET=$[$OFFSET + 1]
     fi
     
     if [[ $i -eq $[$SQUARE_7 - 1] ]];then
-        LAYER=$[$LAYER - 1]
-        SQUARE_7=$[$SQUARE_7 * 2]
-        SQUARE_5=$[$SQUARE_5 * 2] 
-        START_1=$[ $START_1 + $SQUARE_5 ]
-        END_1=$[ $END_1 - $SQUARE_5 ]
+        #sector 2
         START_2=$[ $START_2 + $SQUARE_5 ]
         END_2=$[ $END_2 - $SQUARE_5 ]
         OFFSET=0
-        printf "Now is LAYER=$LAYER, START_1=$START_1, END_1=$END_1"
-
+        #LAYER
+        LAYER=$[$LAYER - 1]
+        SQUARE_7=$[$SQUARE_7 * 2]
+        SQUARE_6=$[$SQUARE_6 * 2]
+        SQUARE_5=$[$SQUARE_5 * 2] 
+        #sector 1
+        START_1=$[ $START_1 + $SQUARE_5 ]
+        END_1=$[ $END_1 - $SQUARE_5 ]
+        #debug
+        #printf "Now is LAYER=$LAYER"
+        #printf ", START_1=$START_1, END_1=$END_1"
+        #printf ", START_2=$START_2, END_2=$END_2"
     fi
     printf "\n"
 done
