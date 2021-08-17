@@ -6,24 +6,30 @@ LAYER=5
 #SQUARE_7 means 2^(7-LAYER), SQUARE_5 means 2^(5-LAYER), 
 SQUARE_7=$[ 2** $[7 - $LAYER]]
 SQUARE_6=$[ 2** $[6 - $LAYER]]
-SQUARE_5=$[ 2** $[5 - $LAYER]]  #often use as sector
-#printf "SQUARE_7 =$SQUARE_7, SQUARE_5= $SQUARE_5\n"
+SQUARE_5=$[ 2** $[5 - $LAYER]]
 
+#START_x/END_x is the start/end point to print '_' in that line.
 #START_1 and END_1 is for sector 1 (rising)
 START_1=20
 END_1=80
-
 #START_2 and END_2 is for sector 2 (separating)
 START_2=19
 END_2=81
-OFFSET=0
+
+#OFFSET for sector 2
+#'+1' for new line, '0' for entering new LAYER
+OFFSET=0    
 
 for ((i=1;i<64;i++))
 do
-    #printf "i= $i\n"
-    
+    #first line does not belong to any LAYER
+    if [ $i -eq 1 ];then
+        for ((j=1;j<101;j++))
+        do
+            printf "_"
+        done
     #sector 1 (rising)
-    if [[ $i -ge $[$SQUARE_7 - $SQUARE_5] ]];then
+    elif [[ $i -ge $[$SQUARE_7 - $SQUARE_5] ]];then
         TAR_PRINT=$START_1
         for ((j=1;j<101;j++))
         do
@@ -40,13 +46,14 @@ do
         done
     #sector 2 (separating)
     else
-        DIR=0 #judge if it is shift for left or right.
-        #DIR=0 shift right, DIR=1 shift left
+        #judge if it is shift for left or right.
+        #DIR=0 shift right by OFFSET, DIR=1 shift left by OFFSET
+        DIR=0 
+        
         TAR_PRINT=$START_2
         for ((j=1;j<101;j++))
         do
-            if [ $DIR -eq 0 ];then
-                #shift right
+            if [ $DIR -eq 0 ];then  #shift right
                 if [ $j -eq $[$TAR_PRINT + $OFFSET] ] && [ $j -le $END_2 ];then
                     if [ $N -ge $LAYER ];then
                         printf "1"
@@ -58,8 +65,7 @@ do
                 else
                     printf "_"
                 fi
-            else
-                #shift left
+            else                    #shift left
                 if [ $j -eq $[$TAR_PRINT - $OFFSET] ] && [ $j -le $END_2 ];then
                     if [ $N -ge $LAYER ];then
                         printf "1"
@@ -94,5 +100,7 @@ do
         #printf ", START_1=$START_1, END_1=$END_1"
         #printf ", START_2=$START_2, END_2=$END_2"
     fi
+    
+    #next line
     printf "\n"
 done
