@@ -1,6 +1,8 @@
 #!/bin/bash
 read N
 
+DEBUG=0
+
 LAYER=5
 
 #SQUARE_7 means 2^(7-LAYER), SQUARE_5 means 2^(5-LAYER), 
@@ -47,37 +49,24 @@ do
     #sector 2 (separating)
     else
         #judge if it is shift for left or right.
-        #DIR=0 shift right by OFFSET, DIR=1 shift left by OFFSET
+        #DIR=EVEN shift right by OFFSET, DIR=ODD shift left by OFFSET
         DIR=0 
         
         TAR_PRINT=$START_2
         for ((j=1;j<101;j++))
         do
-            if [ $DIR -eq 0 ];then  #shift right
-                if [ $j -eq $[$TAR_PRINT + $OFFSET] ] && [ $j -le $END_2 ];then
-                    if [ $N -ge $LAYER ];then
-                        printf "1"
-                    else
-                        printf "_"
-                    fi
-                    TAR_PRINT=$[$TAR_PRINT + $SQUARE_6]
-                    DIR=1
+            #if (j == (TAR_PRINT + ((-1)^(DIR) * OFFSET))) && (j<=END_2)
+            if [ $j -eq $[$TAR_PRINT + $[ $[-1 ** $DIR] * $OFFSET] ] ] && [ $j -le $END_2 ];then
+                if [ $N -ge $LAYER ];then   #if (N<LAYER) not need to print
+                    printf "1"
                 else
                     printf "_"
                 fi
-            else                    #shift left
-                if [ $j -eq $[$TAR_PRINT - $OFFSET] ] && [ $j -le $END_2 ];then
-                    if [ $N -ge $LAYER ];then
-                        printf "1"
-                    else
-                        printf "_"
-                    fi
-                    TAR_PRINT=$[$TAR_PRINT + $SQUARE_6]
-                    DIR=0
-                else
-                    printf "_"
-                fi
-            fi             
+                TAR_PRINT=$[$TAR_PRINT + $SQUARE_6]
+                DIR=$[$DIR + 1]
+            else
+                printf "_"
+            fi           
         done
         OFFSET=$[$OFFSET + 1]
     fi
@@ -95,10 +84,11 @@ do
         #sector 1
         START_1=$[ $START_1 + $SQUARE_5 ]
         END_1=$[ $END_1 - $SQUARE_5 ]
-        #debug
-        #printf "Now is LAYER=$LAYER"
-        #printf ", START_1=$START_1, END_1=$END_1"
-        #printf ", START_2=$START_2, END_2=$END_2"
+        if [ $DEBUG -eq 1 ];then
+            printf "Now is LAYER=$LAYER"
+            printf ", START_1=$START_1, END_1=$END_1"
+            printf ", START_2=$START_2, END_2=$END_2"
+        fi
     fi
     
     #next line
