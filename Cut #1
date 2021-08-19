@@ -1,0 +1,13 @@
+#!/bin/bash
+
+<<XXXX
+cut -c N              #means select the N element
+cut -c N1-N2,N3-N4    #means select the N1~N2 and N3~N4 element
+XXXX
+
+
+for ((i=1;i<=100;i++))
+do
+    read X
+    echo $X | cut -c 3
+done
