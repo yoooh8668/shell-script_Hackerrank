@@ -11,3 +11,8 @@ done
 #OTHER solution 2		#No need to use for loop of read
 cut -c 2,7
 
+#OTHER solution 3		#if read line is not null
+while read line
+do
+    echo $line | cut -c2,7
+done
