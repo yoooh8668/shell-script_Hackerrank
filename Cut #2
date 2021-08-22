@@ -1,4 +1,4 @@
-#My solution
+#My solution 1
 #VAR=$( <COMMAND> )	#VAR is the solution of <COMMAND>, do not forget the space
 for ((i=0;i<100;i++))
 do
@@ -7,4 +7,7 @@ do
 	SEVEN=$( echo $X | cut -c 7 )
 	printf "$TWO$SEVEN\n"
 done
+
+#OTHER solution 2		#No need to use for loop of read
+cut -c 2,7
 
