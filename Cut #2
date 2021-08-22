@@ -1,0 +1,10 @@
+#My solution
+#VAR=$( <COMMAND> )	#VAR is the solution of <COMMAND>, do not forget the space
+for ((i=0;i<100;i++))
+do
+	read X
+	TWO=$( echo $X | cut -c 2 )
+	SEVEN=$( echo $X | cut -c 7 )
+	printf "$TWO$SEVEN\n"
+done
+
