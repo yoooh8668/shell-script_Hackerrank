@@ -1,0 +1,25 @@
+#My solution
+while read x
+do 
+	if [[ $x == *" "* ]]; then		#if x contains space
+        echo $x |cut -d " " -f 4
+    else
+        echo $x
+    fi
+done
+
+#OTHER solution
+cut -d " " -f 4
+
+
+
+
+
+<<COMMAND
+cut -d "<target>" -f <int>
+If <target> doesn't exist, the cut function will do nothing.
+
+But 
+cut -c <int>
+if the size of string is less than <int>, it will get null instead!!
+AOMMAND
