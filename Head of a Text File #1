@@ -1,0 +1,9 @@
+#My solution 1
+cat $1 |head -n 20
+
+#My solution 2		=>head [OPTION]... [FILE]...
+head -n 20 $1
+
+
+#My solution 2
+cat $1 |cut -d $'\n' -f 1-20
