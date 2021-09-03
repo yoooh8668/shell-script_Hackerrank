@@ -1,0 +1,5 @@
+#my solution 1
+cut -d $'\n' -f 12-22
+
+#my solutoin 2
+head -n 22 | tail -n 11
