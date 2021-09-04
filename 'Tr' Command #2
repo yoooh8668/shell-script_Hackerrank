@@ -1,0 +1,15 @@
+tr -d 'a-z'
+
+#tr -d means 'delete', delete the selected char.
+#If you want to delete the string, try delow.
+<<DELETE_STRING
+VAR='Hello'
+tr -d $VAR
+DELETE_STRING
+
+
+
+
+#tr 'a-z' '\0'
+#This is the different case, it replace the char to space.
+#Not the actual "NULL"
