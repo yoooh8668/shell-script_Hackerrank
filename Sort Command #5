@@ -1,0 +1,3 @@
+sort -t $'\t' -k 2 -rn
+
+#'-t' means the separated part of line, '-k N' means the N'th of separated part.
