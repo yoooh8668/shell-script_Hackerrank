@@ -1,0 +1,8 @@
+tr '(' '[' | tr ')' ']'
+
+tr '()' '[]'
+
+tr "()" "[]"
+
+#tr using the matching char swap, in this case ( match [ 
+#You can use "tr 'a-z' 'A-Z' " to change char to capitals.
