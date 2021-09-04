@@ -1,0 +1,4 @@
+tr -s ' '
+
+#'-s' means sequence, it will delete the repeated selected char.
+#This is NOT the way to delete repeated string.
