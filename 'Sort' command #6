@@ -1,1 +1,1 @@
-sort -t $'\t' -k 2 -rn
+sort -t $'\t' -k2 -n
