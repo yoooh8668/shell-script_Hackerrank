@@ -1,0 +1,4 @@
+uniq -c |cut -c 7-
+
+#'uniq -c' will print the repeated times & its name.
+#In this case, we don't want to get the space before result.
