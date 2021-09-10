@@ -1,0 +1,4 @@
+paste - - - |tr '\t' ';'
+#In this question, output 3 element in one line(tab separated).
+#'paste - - -' means that.
+#'paste - -' means output  element in one line(tab separated).
