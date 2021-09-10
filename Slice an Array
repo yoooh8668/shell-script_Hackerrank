@@ -1,0 +1,11 @@
+i=0
+while read X
+do
+    READ[$i]=$X
+    i=$i+1
+done
+
+for i in `seq 3 7`
+do
+    printf "${READ[$i]} "
+done
