@@ -1,0 +1,2 @@
+tr '\n' ';' |head -c -1
+#It will have ';' at the end. So we cut it out.
