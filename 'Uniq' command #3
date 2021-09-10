@@ -1,0 +1,3 @@
+uniq -ci |cut -c 7-
+#-i means ignore all repeated. 
+#(If don't, will not check different lines.)
