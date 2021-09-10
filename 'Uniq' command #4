@@ -1,0 +1,2 @@
+uniq -u
+#Only print lines that are uniq.
