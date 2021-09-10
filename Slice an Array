@@ -5,6 +5,7 @@ do
     i=$i+1
 done
 
+#Below code is the same as 'echo ${READ[@]:3:5}'
 for i in `seq 3 7`
 do
     printf "${READ[$i]} "
